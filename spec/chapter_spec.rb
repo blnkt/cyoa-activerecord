@@ -23,4 +23,12 @@ describe 'Chapter' do
 	  	expect(Chapter.all).to eq [unexpected_astronaut]
 	  end
 	end
+
+	describe '#add_episode' do
+	  it "adds an episode text to a chapter" do
+	  	unexpected_astronaut = Chapter.new({:name => "Unexpected Astronaut"})
+	  	unexpected_astronaut.add_episode("No one ever expects the unexpected astronaut")
+	  	expect(unexpected_astronaut.episode).to eq("No one ever expects the unexpected astronaut!!")
+	  end
+	end
 end
