@@ -14,4 +14,5 @@ class Chapter
   def Chapter.clear
     @@chapters = []
   end
+
 end

@@ -1,6 +1,4 @@
-require 'rspec'
-require './lib/chapter'
-# require './lib/adventure'
+require 'spec_helper'
 
 
 describe 'Chapter' do
