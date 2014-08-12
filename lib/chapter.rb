@@ -37,4 +37,7 @@ class Chapter
     end
   end
 
+  def Chapter.by_id id
+    @@chapters.at(id)   
+  end
 end
