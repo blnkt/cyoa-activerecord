@@ -9,4 +9,12 @@ class Adventure
     @branches = []
     @@adventures << self
   end
+
+  def Adventure.all
+    @@adventures
+  end
+
+  def Adventure.clear
+    @@adventures = []
+  end
 end
