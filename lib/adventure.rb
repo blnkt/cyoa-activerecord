@@ -17,4 +17,6 @@ class Adventure
   def Adventure.clear
     @@adventures = []
   end
+
+  
 end
