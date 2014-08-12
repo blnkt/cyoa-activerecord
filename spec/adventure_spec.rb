@@ -17,4 +17,23 @@ describe 'Adventure' do
       expect(Adventure.all).to eq [unexpected_adventure]
     end
   end
+
+  describe "#add_chapter" do
+    it "add a chapter to an adventurer's progress" do
+      four_adventure = Adventure.new({:name => "Bill"})
+      four_adventure.add_chapter(1)
+      four_adventure.add_chapter(2)
+      four_adventure.add_chapter(3)
+      expect(four_adventure.progress).to eq([1, 2, 3])
+    end
+
+    it "adds a chapter to an adventurer's progress" do
+      six_adventure = Adventure.new({:name => "William"})
+      six_adventure.add_chapter(1)
+      six_adventure.add_chapter(2)
+      six_adventure.add_chapter(3)
+      six_adventure.add_chapter(2)
+      expect(six_adventure.progress).to eq([1, 2, 3])
+    end
+  end
 end

@@ -41,14 +41,14 @@ describe 'Chapter' do
 	  end
 	end
 
-	describe 'Chapter.by_id' do
-	  it "show a chapter by its ID" do
+	describe 'Chapter.find_by_id' do
+	  it "find a chapter by its ID" do
 	    sad_chapter = Chapter.new({:episode => "rain"})
 	    happy_chapter = Chapter.new({:episode => "sunshine", :id => 1})
 	    neutral_chapter = Chapter.new({:episode => "meh", :id => 2})
-	    expect(Chapter.by_id(0)).to eq(sad_chapter)
-	    expect(Chapter.by_id(1)).to eq(happy_chapter)
-	    expect(Chapter.by_id(2)).to eq(neutral_chapter)
+	    expect(Chapter.find_by_id(0)).to eq(sad_chapter)
+	    expect(Chapter.find_by_id(1)).to eq(happy_chapter)
+	    expect(Chapter.find_by_id(2)).to eq(neutral_chapter)
 
 	  end
 	end
