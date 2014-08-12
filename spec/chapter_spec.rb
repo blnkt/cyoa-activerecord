@@ -10,6 +10,11 @@ describe 'Chapter' do
 	    new_chapter = Chapter.new({:episode => "When you're here you're family"})
 	  	expect(new_chapter).to be_an_instance_of Chapter
 		end
+
+		it "initializes with an adventurer's name" do
+			new_chapter = Chapter.new({:name => "blnkt"})
+			expect(new_chapter).to be_an_instance_of Chapter
+		end
 	end
 
 	describe '.all' do
