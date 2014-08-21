@@ -11,7 +11,7 @@ describe 'Adventure' do
     end
   end
 
-  describe '.all' do
+  describe 'Adventure.all' do
     it "show all adventures" do
       unexpected_adventure = Adventure.new({:name => "blnkt"})
       expect(Adventure.all).to eq [unexpected_adventure]

@@ -11,13 +11,13 @@ describe 'Chapter' do
 	  	expect(new_chapter).to be_an_instance_of Chapter
 		end
 
-		it "initialize with an adventurer's name" do
+		it "#initialize with an adventurer's name" do
 			new_chapter = Chapter.new({:name => "blnkt"})
 			expect(new_chapter).to be_an_instance_of Chapter
 		end
 	end
 
-	describe '.all' do
+	describe 'Chapter.all' do
 	  it "show all chapters" do
 	  	unexpected_astronaut = Chapter.new({episode: "No one ever expects the unexpected astronaut!!"})
 	  	expect(Chapter.all).to eq [unexpected_astronaut]
@@ -38,6 +38,7 @@ describe 'Chapter' do
 	    beatles_chapter.add_choice("walk away", "blnkt")
 	    beatles_chapter.add_choice("fight!", "wyatt")
 	    expect(beatles_chapter.choices[1]).to eq(2)
+	    # expect(beatles_chapter.choices[1]
 	  end
 	end
 
@@ -49,6 +50,7 @@ describe 'Chapter' do
 	    expect(Chapter.find_by_id(0)).to eq(sad_chapter)
 	    expect(Chapter.find_by_id(1)).to eq(happy_chapter)
 	    expect(Chapter.find_by_id(2)).to eq(neutral_chapter)
+	    expect(Chapter.find_by_id(4)).to eq(nil)
 
 	  end
 	end

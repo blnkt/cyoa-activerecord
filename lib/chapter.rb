@@ -1,22 +1,21 @@
 class Chapter
   @@chapters = []
-  attr_reader :episode, :choices, :name, :id, :parent_chapter,
-:prompt
+  attr_reader :episode, :choices, :name, :id, :parent_chapter, :prompt
 
 	def initialize attributes
-		# @episode = attributes[:episode]
-		# @id = attributes[:id]
-		# @prompt = attributes[:prompt]
-		# @parent_chapter = attributes[:parent_chapter]
+		@id = attributes[:id]
+    @episode = attributes[:episode]
+		@prompt = attributes[:prompt]
+		@parent_chapter = attributes[:parent_chapter]
 		@choices = []
 		@@chapters << self
 	end
 
-	def Chapter.all
+	def self.all
     @@chapters
   end
 
-  def Chapter.clear
+  def self.clear
     @@chapters = []
   end
 
@@ -24,20 +23,20 @@ class Chapter
     @episode = episode.to_s
   end
 
-  def add_choice choice, author
+  def add_choice(choice, adventure_id)
+    adventure = Adventure.find_by_id(adventure_id)
     if @@chapters.length == 1
       @id = 0
-      Chapter.new({:prompt => choice, :parent_chapter => @id, :id => (@id + 1), :name => author, :episode => "This choice needs your adventure!"})
-      @id += 1
-      @choices << @id
+      Chapter.new({:episode => "\nYour Princess is in another castle: \nEnter 'ae' to add an episode to this chapter\n", :prompt => choice, :parent_chapter => @id, :id => (@id + 1), :name => adventure.name})
+      @choices << @id + 1
     else
       next_id = @@chapters.length
-      Chapter.new({:prompt => choice, :parent_chapter => @id, :id => next_id, :name => author, :episode => "This choice needs your adventure!"})
+      Chapter.new({:episode => "\nYour Princess is in another castle: \nEnter 'ae' to add an episode to this chapter\n", :prompt => choice, :parent_chapter => @id, :id => next_id, :name => adventure.name})
       @choices << next_id
     end
   end
 
-  def Chapter.find_by_id id
-    @@chapters.at(id)   
+  def self.find_by_id id
+    @@chapters.at(id.to_i)   
   end
 end

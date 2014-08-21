@@ -1,8 +1,9 @@
 class Adventure
   @@adventures = []
-  attr_reader :progress, :name, :branches
+  attr_reader :progress, :name, :branches, :id
 
 	def initialize attributes 
+    @id = Time.now.to_i
 		@name = attributes[:name]
     @branches = []
     @progress = []
@@ -24,5 +25,13 @@ class Adventure
     else
       @progress << chapter_id
     end
+  end
+
+  def self.find_by_id id
+    @@adventures.each do |adventure|
+      if id == adventure.id
+        return adventure
+      end
+    end    
   end
 end
