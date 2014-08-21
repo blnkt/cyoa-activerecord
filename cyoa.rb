@@ -18,7 +18,7 @@ end
 
 
 def menu(chapter_id, adventure_id)
-  #clear_screen
+  clear_screen
   chapter = Chapter.find_by_id(chapter_id)
   puts chapter.prompt
   linebreak
