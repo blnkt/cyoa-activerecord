@@ -4,6 +4,7 @@ class Adventure
 
 	def initialize attributes 
 		@name = attributes[:name]
+    @id = Time.new.strftime('%Y%m%d%H%M%S%L%24N').to_i
     @branches = []
     @progress = []
     @branches = []
@@ -28,9 +29,7 @@ class Adventure
 
   def self.find_by_id id
     @@adventures.each do |adventure|
-      if id == adventure.id
-        return adventure
-      end
+    return adventure if id == adventure.id
     end    
   end
 end

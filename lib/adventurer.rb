@@ -1,16 +1,15 @@
 class Adventurer
   @@adventurers = []
-  attr_reader :password, :name, :adventures, :bio, :fave_book, :avatar
+  attr_reader :id, :password, :name, :adventures, :bio, :fave_book, :avatar
 
   def initialize attributes
+  	@id = @@adventurers.length - 1
   	@password = attributes[:password]
   	@name = attributes[:name]
   	@adventures = []
   	@bio = attributes[:bio]
   	@fave_book = attributes[:fave_book]
   	@avatar = attributes[:avatar]
-  	adventure = Adventure.new(name: @name, id: Time.now.to_i)
-  	@adventures << adventure.id
   end
 	def self.all
     @@chapters
@@ -21,10 +20,6 @@ class Adventurer
   end
 
   def self.find_by_id id
-    @@adventurers.each do |adventurer|
-      if id == adventure.id
-        return adventure
-      end
-    end    
+    @@adventurers.at(id)
   end
 end

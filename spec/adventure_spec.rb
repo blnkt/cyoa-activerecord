@@ -36,4 +36,16 @@ describe 'Adventure' do
       expect(six_adventure.progress).to eq([1, 2, 3])
     end
   end
+
+
+  describe '.find_by_id' do
+    it "find a Adventure by its ID" do
+      sad_adventure = Adventure.new({name: 'Grumpy Gus'})
+      happy_adventure = Adventure.new({name: 'Skeeter'})
+      neutral_adventure = Adventure.new({name: 'Daria', id: 4})
+      expect(Adventure.find_by_id(sad_adventure.id)).to eq(sad_adventure)
+      expect(Adventure.find_by_id(happy_adventure.id)).to eq(happy_adventure)
+      expect(Adventure.find_by_id(neutral_adventure.id)).to eq(neutral_adventure)
+    end
+  end
 end

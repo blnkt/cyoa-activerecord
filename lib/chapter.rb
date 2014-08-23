@@ -37,6 +37,6 @@ class Chapter
   end
 
   def self.find_by_id id
-    @@chapters.at(id.to_i)   
+    @@chapters.at(id.to_i)
   end
 end
