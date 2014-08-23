@@ -3,7 +3,6 @@ class Adventure
   attr_reader :progress, :name, :branches, :id
 
 	def initialize attributes 
-    @id = Time.now.to_i
 		@name = attributes[:name]
     @branches = []
     @progress = []

@@ -1,11 +1,13 @@
 require './lib/chapter'
 require './lib/adventure'	
+require './lib/adventurer' 
+
 
 def welcome
 	puts "Welcome to the adventure.\n\nWhat's your name?"
-	name = gets.chomp
-	user_adventure = Adventure.new({name: name})
-	prologue = Chapter.new({id: "0", prompt: "#{name}'s Adventure", :episode => "You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat.", name: "blnkt"})
+  user = Adventurer.new(name: gets.chomp)
+	user_adventure = Adventure.find_by_id(user.adventure_id)
+	prologue = Chapter.new({id: "0", prompt: "#{user.name}'s Adventure", :episode => "You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat.", name: "blnkt"})
   user_adventure.add_chapter(0)
   prologue.add_choice("Walk the bike out of the field to a nearby road", user_adventure.id)
   user_adventure.add_chapter(1)
