@@ -37,7 +37,6 @@ describe 'Adventure' do
     end
   end
 
-
   describe '.find_by_id' do
     it "find a Adventure by its ID" do
       sad_adventure = Adventure.new({name: 'Grumpy Gus'})
