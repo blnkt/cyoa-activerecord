@@ -20,7 +20,7 @@ describe 'Adventure' do
 
   describe "#add_chapter" do
     it "add a chapter to an adventurer's progress" do
-      four_adventure = Adventure.new({:name => "Bill"})
+      four_adventure = Adventure.new({id: Time.now})
       four_adventure.add_chapter(1)
       four_adventure.add_chapter(2)
       four_adventure.add_chapter(3)

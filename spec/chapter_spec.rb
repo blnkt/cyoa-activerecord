@@ -35,8 +35,8 @@ describe 'Chapter' do
 	describe '#add_choice' do
 	  it "add a choice to a chapter" do
 	    beatles_chapter = Chapter.new({:episode => "they came in through the bathroom window", :id => 0})
-	    beatles_chapter.add_choice("walk away", "blnkt")
-	    beatles_chapter.add_choice("fight!", "wyatt")
+	    beatles_chapter.add_choice("walk away", 2)
+	    beatles_chapter.add_choice("fight!", 1)
 	    expect(beatles_chapter.choices[1]).to eq(2)
 	    # expect(beatles_chapter.choices[1]
 	  end
