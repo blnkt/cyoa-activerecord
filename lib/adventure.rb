@@ -29,7 +29,7 @@ class Adventure
 
   def self.find_by_id id
     @@adventures.each do |adventure|
-    return adventure if id == adventure.id
+     return adventure if id == adventure.id
     end    
   end
 end
