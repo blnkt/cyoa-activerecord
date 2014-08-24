@@ -34,4 +34,12 @@ describe 'Adventurer' do
       expect(adventurer3.avatar).to eq('%>?<@')
     end
   end
+
+  describe '.name_checker' do
+    it 'authenticate username' do
+      adventurer1 = Adventurer.new({name: 'Neil Gaiman'})
+      expect(Adventurer.name_checker('Neal Stephenson')).to eq(false)
+      expect(Adventurer.name_checker(adventurer1.name)).to eq(true)
+    end
+  end
 end

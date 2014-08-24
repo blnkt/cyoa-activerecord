@@ -41,4 +41,14 @@ class Adventurer
     	@avatar = name
     end
   end
+
+  def self.name_checker username
+  	@@adventurers.each do |adventurer|
+  		if adventurer.name == username
+  			return true
+  		else
+  			return false
+  		end
+  	end
+  end
 end
