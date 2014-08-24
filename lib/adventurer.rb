@@ -57,10 +57,15 @@ class Adventurer
   end
 
   def self.find_by_user(name, password)
+  	@bingo
   	@@adventurers.each do |adventurer|
   		if adventurer.name == name && adventurer.password == password
-  			return adventurer
+  			@bingo = adventurer
+  			break
+  		else
+  			@bingo = nil
   		end
   	end
+  	return @bingo if @bingo != nil
   end
 end

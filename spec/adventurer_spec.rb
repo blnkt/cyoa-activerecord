@@ -52,16 +52,17 @@ describe 'Adventurer' do
     end
   end
 
-  describe '.find_by_id' do
-  it "find a Adventurer by their ID" do
-    adventurer1 = Adventurer.new({name: 'John Steinbeck'})
-    adventurer2 = Adventurer.new({name: 'Neil Gaiman'})
-    adventurer3 = Adventurer.new({name: 'Neal Stephenson', id: 4})
+  describe '.find_by_user' do
+  it "find a Adventurer by their username and password" do
+    adventurer1 = Adventurer.new({name: 'John Steinbeck', password: 1})
+    adventurer2 = Adventurer.new({name: 'Neil Gaiman', password: 'shiny'})
+    adventurer3 = Adventurer.new({name: 'Neal Stephenson', id: 4, password: 'cyberpunk'})
 
-    expect(Adventurer.find_by_id(0).name).to eq(adventurer1.name)
-    expect(Adventurer.find_by_id(1).name).to eq(adventurer2.name)
-    expect(Adventurer.find_by_id(2).name).to eq(adventurer3.name)
-    expect(Adventurer.find_by_id(4)).to eq(nil)
+    expect(Adventurer.find_by_user('John Steinbeck', 1)).to eq(adventurer1)
+    expect(Adventurer.find_by_user('Neil Gaiman', 'shiny')).to eq(adventurer2)
+    expect(Adventurer.find_by_user('Neal Stephenson', 'cyberpunk')).to eq(adventurer3)
+    print Adventurer.find_by_user('Hemingway', 'dude')
+    expect(Adventurer.find_by_user('Hemingway', 'dude')).to eq(nil)
   end
 end
 
