@@ -4,11 +4,15 @@ require './lib/adventurer'
 
 
 def welcome
+  creator = Adventurer.new(name: 'blnkt', password: 'hey')
 	puts "Welcome to the adventure.\n\nWhat's your name?"
 	name = gets.chomp
   unless Adventurer.name_checker(name) == true
     new_user(name)
   else
+    puts "Please enter your password:"
+    password = gets.chomp
+    user = Adventurer.find_by_user(name, password)
   user_adventure = Adventure.new({name: name})
   prologue = Chapter.new({id: "0", prompt: "#{name}'s Adventure", :episode => "You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat.", name: "blnkt"})
   user_adventure.add_chapter(0)
