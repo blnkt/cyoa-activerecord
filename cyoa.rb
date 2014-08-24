@@ -128,7 +128,7 @@ def profile username
     new_bio(account)
 
   when 'f'
-  when 'm'
+    new_fave(account)
   else
     menu(account.adventures.last.progress.last.id, account.adventures.last.id)
   end
@@ -136,13 +136,18 @@ end
 
 def new_avatar account
   puts "Enter 'human', 'bear', 'penguin', 'joker', or 'kazoo' to select an avatar, or type in your own ASCII"
-  account.add_avatar = gets.chomp
+  account.add_avatar(gets.chomp)
 
 end
 
 def new_bio account
   puts "Enter a short biography:"
-  user_bio = gets.chomp
+  account.add_bio(gets.chomp)
+end
+
+def new_fave account
+  puts "Enter a short biography:"
+  account.add_fave(gets.chomp)
 end
 
 def clear_screen

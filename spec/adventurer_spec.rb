@@ -28,7 +28,7 @@ describe 'Adventurer' do
     it 'add an avatar to the adventurers profile' do
       adventurer1 = Adventurer.new({name: 'Neil Gaiman'})
       adventurer3 = Adventurer.new({name: 'Neal Stephenson', id: 4})
-      adventurer1.add_avatar('koala')
+      adventurer1.add_avatar('penguin')
       adventurer3.add_avatar('%>?<@')
       expect(adventurer1.avatar).to eq("ᶘᵒᴥᵒᶅ")
       expect(adventurer3.avatar).to eq('%>?<@')
