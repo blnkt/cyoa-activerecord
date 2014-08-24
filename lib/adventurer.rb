@@ -8,7 +8,7 @@ class Adventurer
   	@name = attributes[:name]
   	@adventures = []
   	@bio = attributes[:bio]
-  	@fave_book = attributes[:fave_book]
+  	@fave = attributes[:fave]
   	@avatar = attributes[:avatar]
   	@first_adventure = Adventure.new(name: @name)
   	@adventures << first_adventure

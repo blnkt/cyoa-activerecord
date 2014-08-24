@@ -5,7 +5,7 @@ require './lib/adventurer'
 
 def welcome
   clear_screen
-  creator = Adventurer.new(name: 'blnkt', password: 'hey')
+  creator = Adventurer.new({name: 'blnkt', password: 'hey', bio: "Content&Code", fave: 'The Princess Bride', avatar: '??????????'})
 	puts "It's time for adventuring.  What's your name?"
 	name = gets.chomp
   unless Adventurer.name_checker(name) == true
@@ -21,8 +21,9 @@ def welcome
     else
       welcome
     end
-    prologue_runner(@user, @user_adventure)
   end
+    prologue_runner(@user, @user_adventure)
+    menu(0, @user_adventure.id)
 end
 
 def prologue_runner(user, user_adventure)
@@ -51,7 +52,7 @@ def menu(chapter_id, adventure_id)
   puts "Enter 'choice number' to proceed"
   puts "Enter 'ac' to add an additional choice"
   puts "Enter '<' to turn back"
-  puts "Enter 'p' to view #{adventure.name}'s profile"
+  puts "Enter 'p' to view your profile"
   puts "Enter 'x' to leave the adventure"
   choice_id = gets.chomp
   if choice_id == 'x'
@@ -66,14 +67,13 @@ def menu(chapter_id, adventure_id)
 	  chapter.add_episode(episode)
     puts chapter.id
   elsif choice_id == 'p'
-    user_profile(adventure.name)
+    profile(adventure.name)
   elsif Chapter.find_by_id(choice_id) != nil
-    Adventure.find_by_id(adventure_id).add_chapter(choice_id)
+    adventure.add_chapter(choice_id)
     menu(choice_id, adventure_id)
 	else
 	  menu(chapter.id, adventure_id)
   end
-  puts chapter.episode
   menu(chapter.id, adventure_id)
 end 
 
@@ -101,22 +101,34 @@ def new_password(user)
   end
 end
 
-def profile username
-  clear_screen
-  puts "Please enter your password:"
+def profile_verification (username)
+  puts "#{username.upcase}, please enter your password:"
   password = gets.chomp
-  puts username.upcase
   account = Adventurer.find_by_user(username, password)
-  if account.avatar == nil || account.bio == nil || account.fave_book == nil
+  return account
+end
+
+def profile name
+  username = name
+  clear_screen
+  account = profile_verification(username)
+  loop do
     puts "Looks like your profile is incomplete."
-    new_avatar(account) if account.avatar == nil
-    new_avatar(account) if account.bio == nil
-    new_avatar(account) if account.fave_book == nil
-  else
-    puts account.avatar
-    puts "Bio:" + account.bio
-    puts "My favorite adventure:" + account.fave_book
+    if account.avatar == nil
+      new_avatar(account) if account.avatar == nil
+    elsif account.bio == nil 
+      new_bio(account) if account.bio == nil
+    elsif account.fave == nil
+      new_fave(account) if account.fave == nil
+    else
+      clear_screen
+      break
+    end
   end
+  puts account.name.upcase
+  puts account.avatar
+  puts "Bio:" + account.bio
+  puts "My favorite adventure:" + account.fave
   puts "Enter 'a' to edit your avatar"
   puts "Enter 'b' to edit your biography"
   puts "Enter 'f' to edit your favorite adventure (book, movie, life, etc.)"
@@ -126,12 +138,14 @@ def profile username
     new_avatar(account)
   when 'b'
     new_bio(account)
-
   when 'f'
     new_fave(account)
+  when 'm'
+    menu(0, account.first_adventure)
   else
-    menu(account.adventures.last.progress.last.id, account.adventures.last.id)
+    profile(username)
   end
+  profile(username)
 end
 
 def new_avatar account
@@ -146,7 +160,7 @@ def new_bio account
 end
 
 def new_fave account
-  puts "Enter a short biography:"
+  puts "Enter your favorite adventure:"
   account.add_fave(gets.chomp)
 end
 
