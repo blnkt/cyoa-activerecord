@@ -24,4 +24,21 @@ class Adventurer
   	return nil if id > @@adventurers.length
     @@adventurers.at(id)
   end
+
+  def add_avatar name
+  	case name
+  	when 'ambivalent'
+  		@avatar = "(]-_-[)"
+  	when 'bear'
+  		@avatar = "⊂(^( )^)⊃"
+    when 'koala'
+    	@avatar = "ᶘᵒᴥᵒᶅ"
+    when 'confused'
+	    @avatar = "(♠_♦)"
+    when 'shifty'
+	    @avatar = "( ͡°ʖ͡°)"
+    else
+    	@avatar = name
+    end
+  end
 end
