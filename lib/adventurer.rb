@@ -29,19 +29,23 @@ class Adventurer
 
   def add_avatar name
   	case name
-  	when 'ambivalent'
+  	when 'human'
   		@avatar = "(]-_-[)"
   	when 'bear'
   		@avatar = "⊂(^( )^)⊃"
-    when 'koala'
+    when 'penguin'
     	@avatar = "ᶘᵒᴥᵒᶅ"
-    when 'confused'
+    when 'joker'
 	    @avatar = "(♠_♦)"
-    when 'shifty'
+    when 'kazoo'
 	    @avatar = "( ͡°ʖ͡°)"
     else
     	@avatar = name
     end
+  end
+
+  def add_bio bio
+  	@bio = bio
   end
 
   def self.name_checker username

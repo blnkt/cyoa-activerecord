@@ -39,6 +39,7 @@ end
 def menu(chapter_id, adventure_id)
   clear_screen
   chapter = Chapter.find_by_id(chapter_id)
+  adventure = Adventure.find_by_id(adventure_id)
   puts chapter.prompt
   linebreak
   puts chapter.episode 
@@ -50,6 +51,7 @@ def menu(chapter_id, adventure_id)
   puts "Enter 'choice number' to proceed"
   puts "Enter 'ac' to add an additional choice"
   puts "Enter '<' to turn back"
+  puts "Enter 'p' to view #{adventure.name}'s profile"
   puts "Enter 'x' to leave the adventure"
   choice_id = gets.chomp
   if choice_id == 'x'
@@ -63,6 +65,8 @@ def menu(chapter_id, adventure_id)
     episode = gets.chomp
 	  chapter.add_episode(episode)
     puts chapter.id
+  elsif choice_id == 'p'
+    user_profile(adventure.name)
   elsif Chapter.find_by_id(choice_id) != nil
     Adventure.find_by_id(adventure_id).add_chapter(choice_id)
     menu(choice_id, adventure_id)
@@ -97,6 +101,49 @@ def new_password(user)
   end
 end
 
+def profile username
+  clear_screen
+  puts "Please enter your password:"
+  password = gets.chomp
+  puts username.upcase
+  account = Adventurer.find_by_user(username, password)
+  if account.avatar == nil || account.bio == nil || account.fave_book == nil
+    puts "Looks like your profile is incomplete."
+    new_avatar(account) if account.avatar == nil
+    new_avatar(account) if account.bio == nil
+    new_avatar(account) if account.fave_book == nil
+  else
+    puts account.avatar
+    puts "Bio:" + account.bio
+    puts "My favorite adventure:" + account.fave_book
+  end
+  puts "Enter 'a' to edit your avatar"
+  puts "Enter 'b' to edit your biography"
+  puts "Enter 'f' to edit your favorite adventure (book, movie, life, etc.)"
+  puts "Enter 'm' to return to the adventure"
+  case gets.chomp
+  when 'a'
+    new_avatar(account)
+  when 'b'
+    new_bio(account)
+
+  when 'f'
+  when 'm'
+  else
+    menu(account.adventures.last.progress.last.id, account.adventures.last.id)
+  end
+end
+
+def new_avatar account
+  puts "Enter 'human', 'bear', 'penguin', 'joker', or 'kazoo' to select an avatar, or type in your own ASCII"
+  account.add_avatar = gets.chomp
+
+end
+
+def new_bio account
+  puts "Enter a short biography:"
+  user_bio = gets.chomp
+end
 
 def clear_screen
   puts "\e[H\e[2J"
