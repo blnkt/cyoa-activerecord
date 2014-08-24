@@ -1,6 +1,9 @@
-require './lib/chapter'
-require './lib/adventure'	
-require './lib/adventurer' 
+require 'bundler/setup'
+Bundler.require(:default)
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
+# require './lib/chapter'
+# require './lib/adventure'	
+# require './lib/adventurer' 
 
 
 def welcome
