@@ -51,4 +51,18 @@ describe 'Adventurer' do
       expect(adventurer1.password).to eq('Neal Stephenson')
     end
   end
+
+  describe '.find_by_id' do
+  it "find a Adventurer by their ID" do
+    adventurer1 = Adventurer.new({name: 'John Steinbeck'})
+    adventurer2 = Adventurer.new({name: 'Neil Gaiman'})
+    adventurer3 = Adventurer.new({name: 'Neal Stephenson', id: 4})
+
+    expect(Adventurer.find_by_id(0).name).to eq(adventurer1.name)
+    expect(Adventurer.find_by_id(1).name).to eq(adventurer2.name)
+    expect(Adventurer.find_by_id(2).name).to eq(adventurer3.name)
+    expect(Adventurer.find_by_id(4)).to eq(nil)
+  end
+end
+
 end

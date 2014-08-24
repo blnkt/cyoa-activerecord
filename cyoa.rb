@@ -7,21 +7,10 @@ def welcome
 	puts "Welcome to the adventure.\n\nWhat's your name?"
 	name = gets.chomp
   unless Adventurer.name_checker(name) == true
-    puts "Looks like this is your first adventure.  Create a profile using #{name} as your username?(y/n)"
-    case gets.chomp.downcase
-    when 'y'
-    user = Adventurer.new(name: name)
-    when 'n'
-      puts "Please enter the name you'd prefer:"
-      user = adventurer.new(name: gets.chomp.to_s)
-    end
-    puts "Excellent.  Now enter a password so your adventure stays all your own:"
-    user[password] = gets.chomp
+    new_user(name)
   else
-    puts ""
-  end
-	user_adventure = Adventure.new({name: user.name})
-	prologue = Chapter.new({id: "0", prompt: "#{user.name}'s Adventure", :episode => "You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat.", name: "blnkt"})
+  user_adventure = Adventure.new({name: name})
+  prologue = Chapter.new({id: "0", prompt: "#{name}'s Adventure", :episode => "You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat.", name: "blnkt"})
   user_adventure.add_chapter(0)
   prologue.add_choice("Walk the bike out of the field to a nearby road", user_adventure.id)
   user_adventure.add_chapter(1)
@@ -30,6 +19,7 @@ def welcome
   prologue.add_choice("Put on the hat and head towards the sound of water", user_adventure.id)
   user_adventure.add_chapter(3)
   menu(0, user_adventure.id)
+  end
 end
 
 
@@ -69,6 +59,26 @@ def menu(chapter_id, adventure_id)
   puts chapter.episode
   menu(chapter.id, adventure_id)
 end 
+
+def new_user(name)
+  puts "Looks like this is your first adventure.  Let's create a profile using #{name} as your username."
+  user = Adventurer.new(name: name)
+  new_password(name)
+end
+
+def new_password(user)
+  puts "\nEnter a new password so your adventure stays all your own:"
+  password1 = gets.chomp
+  puts "Please reenter your password:"
+  if password1 == gets.chomp
+    user.add_password(password1)
+  else
+    puts "Sorry those passwords don't match."
+    sleep 2
+    new_password(user)
+  end
+end
+
 
 def clear_screen
   puts "\e[H\e[2J"

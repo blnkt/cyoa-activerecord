@@ -55,4 +55,12 @@ class Adventurer
   def add_password password
   	@password = password
   end
+
+  def self.find_by_user(name, password)
+  	@@adventurers.each do |adventurer|
+  		if adventurer.name == name && adventurer.password == password
+  			return adventurer
+  		end
+  	end
+  end
 end
