@@ -1,6 +1,6 @@
 class Adventurer
   @@adventurers = []
-  attr_reader :id, :password, :name, :adventures, :bio, :fave_book, :avatar
+  attr_reader :id, :password, :name, :adventures, :bio, :fave_book, :avatar, :first_adventure
 
   def initialize attributes
   	@id = @@adventurers.length
@@ -10,6 +10,8 @@ class Adventurer
   	@bio = attributes[:bio]
   	@fave_book = attributes[:fave_book]
   	@avatar = attributes[:avatar]
+  	@first_adventure = Adventure.new(name: @name)
+  	@adventures << first_adventure
   	@@adventurers << self
   end
 	def self.all

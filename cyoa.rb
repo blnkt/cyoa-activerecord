@@ -4,17 +4,29 @@ require './lib/adventurer'
 
 
 def welcome
+  clear_screen
   creator = Adventurer.new(name: 'blnkt', password: 'hey')
-	puts "Welcome to the adventure.\n\nWhat's your name?"
+	puts "It's time for adventuring.  What's your name?"
 	name = gets.chomp
   unless Adventurer.name_checker(name) == true
     new_user(name)
+    welcome
   else
     puts "Please enter your password:"
     password = gets.chomp
-    user = Adventurer.find_by_user(name, password)
-  user_adventure = Adventure.new({name: name})
-  prologue = Chapter.new({id: "0", prompt: "#{name}'s Adventure", :episode => "You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat.", name: "blnkt"})
+    unless Adventurer.find_by_user(name, password) == nil
+      @user = Adventurer.find_by_user(name, password)
+      @user_adventure = Adventure.new({name: @user.name})
+      @user.adventures << @user_adventure 
+    else
+      welcome
+    end
+    prologue_runner(@user, @user_adventure)
+  end
+end
+
+def prologue_runner(user, user_adventure)
+  prologue = Chapter.new({id: "0", prompt: "#{user.name}'s Adventure", :episode => "You awake in a field.  You're clear headed but you remember nothing.  Gaping about, you discover a bicycle, a set of keys, and a baseball hat."})
   user_adventure.add_chapter(0)
   prologue.add_choice("Walk the bike out of the field to a nearby road", user_adventure.id)
   user_adventure.add_chapter(1)
@@ -22,10 +34,7 @@ def welcome
   user_adventure.add_chapter(2)
   prologue.add_choice("Put on the hat and head towards the sound of water", user_adventure.id)
   user_adventure.add_chapter(3)
-  menu(0, user_adventure.id)
-  end
 end
-
 
 def menu(chapter_id, adventure_id)
   clear_screen
@@ -67,7 +76,10 @@ end
 def new_user(name)
   puts "Looks like this is your first adventure.  Let's create a profile using #{name} as your username."
   user = Adventurer.new(name: name)
-  new_password(name)
+  prologue_runner(user, user.first_adventure)
+  new_password(user)
+  menu(0, user.first_adventure.id)
+
 end
 
 def new_password(user)
@@ -76,6 +88,8 @@ def new_password(user)
   puts "Please reenter your password:"
   if password1 == gets.chomp
     user.add_password(password1)
+    puts "Thank you for joining the adventure.  Enter your name and password when prompted."
+    sleep 2
   else
     puts "Sorry those passwords don't match."
     sleep 2
