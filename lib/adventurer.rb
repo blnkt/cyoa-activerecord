@@ -51,4 +51,8 @@ class Adventurer
   		end
   	end
   end
+
+  def add_password password
+  	@password = password
+  end
 end

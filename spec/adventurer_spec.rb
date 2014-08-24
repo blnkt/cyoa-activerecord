@@ -42,4 +42,13 @@ describe 'Adventurer' do
       expect(Adventurer.name_checker(adventurer1.name)).to eq(true)
     end
   end
+
+
+  describe '#add_password' do
+    it 'add password' do
+      adventurer1 = Adventurer.new({name: 'Neil Gaiman'})
+      adventurer1.add_password('Neal Stephenson')
+      expect(adventurer1.password).to eq('Neal Stephenson')
+    end
+  end
 end
