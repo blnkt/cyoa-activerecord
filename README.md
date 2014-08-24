@@ -1,4 +1,4 @@
-Choose Your Own Adventure
+Choose Your Own Adventure 1.0
 
 
  About
