@@ -5,18 +5,10 @@ class Chapter < ActiveRecord::Base
   belongs_to :parent_chapter, class_name: 'Chapter'
   @@chapters = []
 
-  attr_reader :episode, :choices, :id, :parent_chapter_id, :prompt
-
-	def self.all
-    @@chapters
-  end
-
-  def self.clear
-    @@chapters = []
-  end
+  attr_reader :choices
 
   def add_episode episode
-    @episode = episode.to_s
+    self.update(episode: episode.to_s)
   end
 
   def add_choice(choice, adventure_id)
