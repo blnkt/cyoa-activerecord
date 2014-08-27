@@ -1,6 +1,11 @@
-class Chapter
+
+class Chapter < ActiveRecord::Base
+  has_and_belongs_to_many :adventures
+  has_many :chapters, class_name: 'Chapter', foreign_key: 'parent_chapter_id'
+  belongs_to :parent_chapter, class_name: 'Chapter'
   @@chapters = []
-  attr_reader :episode, :choices, :name, :id, :parent_chapter, :prompt
+
+  attr_reader :episode, :choices, :id, :parent_chapter_id, :prompt
 
 	def initialize attributes
 		@id = attributes[:id]
