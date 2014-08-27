@@ -5,12 +5,6 @@ class Adventure < ActiveRecord::Base
 
   attr_reader :progress, :branches, :id, :user_id
 
-	def initialize 
-    @branches = []
-    @progress = 
-    @branches = []
-  end
-
   def add_chapter chapter_id
     if @progress.include?(chapter_id)
       @branches << @progress unless @branches.include?(@progress)

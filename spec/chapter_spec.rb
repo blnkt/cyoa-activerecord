@@ -5,6 +5,8 @@ describe Chapter do
 	end
 
 	it { should have_and_belong_to_many :adventures}
+	it { should have_many :chapters }
+	it { should belong_to  :parent_chapter }
 	# describe "#initialize" do
 	#   it "intialize chapter with an episode" do
 	#     new_chapter = Chapter.new({:episode => "When you're here you're family"})

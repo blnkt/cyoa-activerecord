@@ -7,15 +7,6 @@ class Chapter < ActiveRecord::Base
 
   attr_reader :episode, :choices, :id, :parent_chapter_id, :prompt
 
-	def initialize attributes
-		@id = attributes[:id]
-    @episode = attributes[:episode]
-		@prompt = attributes[:prompt]
-		@parent_chapter = attributes[:parent_chapter]
-		@choices = []
-		@@chapters << self
-	end
-
 	def self.all
     @@chapters
   end
