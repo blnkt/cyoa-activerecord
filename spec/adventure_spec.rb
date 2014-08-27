@@ -1,24 +1,9 @@
 require 'spec_helper'
 
 describe Adventure do
-#   before do
-#     Adventure.clear
-#   end
+
 it { should have_and_belong_to_many :chapters }
 it {should belong_to :user}
-  describe "#initialize" do
-    it "initialize an Adventure (i.e. an adventurer's reading/writing of the available chapters" do
-       new_adventure = Adventure.new()
-       expect(new_adventure).to be_an_instance_of(Adventure)
-    end
-  end
-
-#   describe 'Adventure.all' do
-#     it "show all adventures" do
-#       unexpected_adventure = Adventure.new({:name => "blnkt"})
-#       expect(Adventure.all).to eq [unexpected_adventure]
-#     end
-#   end
 
 #   describe "#add_chapter" do
 #     it "add a chapter to an adventurer's progress" do
