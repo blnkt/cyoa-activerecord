@@ -4,6 +4,7 @@ describe Adventure do
 
 it { should have_and_belong_to_many :chapters }
 it {should belong_to :user}
+it { should validate_presence_of :user }
 
 #   describe "#add_chapter" do
 #     it "add a chapter to an adventurer's progress" do

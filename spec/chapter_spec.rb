@@ -13,14 +13,14 @@ describe Chapter do
 	  end
 	end
 
-	# describe '#add_choice' do
-	#   it "add a choice to a chapter" do
-	#     beatles_chapter = Chapter.new({:episode => "they came in through the bathroom window", :id => 0})
-	#     beatles_chapter.add_choice("walk away", 2)
-	#     beatles_chapter.add_choice("fight!", 1)
-	#     expect(beatles_chapter.choices[1]).to eq(2)
-	#     # expect(beatles_chapter.choices[1]
-	#   end
-	# end
-
+	describe '#add_choice' do
+	  it "add a choice to a chapter" do
+	    beatles_chapter = Chapter.create({prompt: "glasses", episode: "they came in through the bathroom window"})
+	    rolling_stones_chapter = Chapter.create({prompt: "wild horses couldn't drag me away"})
+	    print beatles_chapter.episode
+	    beatles_chapter.add_choice(rolling_stones_chapter)
+	    expect(beatles_chapter.choices).to eq([rolling_stones_chapter])
+	    # expect(beatles_chapter.choices[1]
+	  end
+	end
 end
