@@ -8,8 +8,8 @@ class Adventure < ActiveRecord::Base
     unless self.chapters.include?(chapter)
       self.chapters << chapter
     else
-      Adventure.create(user_id: self.user_id)
-      self.chapters
+      branch = Adventure.create(user_id: self.user_id)
+      self.chapters.pop(2).each { |chapter| branch.chapters << chapter }
     end
   end
 end
